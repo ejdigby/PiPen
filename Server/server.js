@@ -26,7 +26,7 @@ app.post('/', function(req, res){
 	//Emit data to html
 	data = req.body
 	io.emit('data', data)
-	
+	res.end()
 });
 
 //Define GET route for /

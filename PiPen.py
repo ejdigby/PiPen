@@ -46,4 +46,3 @@ while True:
     #Send latest data
     send({"x":x, "y":y, "colour": coloursHex[colour]})
 
-  # send({"x":1, "y":2, "colour": coloursHex[colour]})
