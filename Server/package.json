@@ -1,0 +1,10 @@
+{
+  "name": "PiPen",
+  "version": "0.0.1",
+  "description": "A Raspberry Pi App for Sixth Form Open Evening 2016",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "*",
+    "socket.io": "^1.5.1"
+  }
+}
