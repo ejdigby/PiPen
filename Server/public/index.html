@@ -41,7 +41,7 @@
 		//Draw Circle
 	    ctx.arc(coords[0], coords[1], 4, 0, 360, false);
 	    ctx.fill()
-	    // ctx.fillstyle = colour
+	    ctx.fillstyle = colour
 
 	}
   
@@ -49,7 +49,6 @@
 
  	socket.on('data', function (data) {
  	   drawpixel(data["x"],data["y"], data["colour"])
-
  	});
 
  	 //Draw Center Pixel
