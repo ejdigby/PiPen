@@ -6,7 +6,18 @@
 </head>
 
 <body>
-<h1> Hello World </h1>
+
+<h1 class="data">"Hello World"</h1>
 <script type="text/javascript" location="js/script.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+  var socket = io();
+
+  socket.on('data', function (data) {
+    console.log(data);
+    $(".data").text(data)
+  });
+</script>
 </body>
 </html>

@@ -1,5 +1,12 @@
 #PiPen
+# from sense_hat import sense_hat
 
-from sense_hat import sense_hat
-sense = SenseHat()
+import requests
 
+
+# sense = SenseHat()
+
+def send(data):
+	r = requests.post('http://localhost:8080', data)
+
+send({'key':'value'})
