@@ -24,30 +24,36 @@
 <script>
 
   	//Setup canvas
+  	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
 
   	//Set Coords to center of the canvas
   	//Coords x,y
   	coords = [$("canvas").width()/2, $("canvas").height()/2]
-  	console.log(coords)
 
-    
-  	var canvas = document.getElementById('canvas');
-  	if (canvas.getContext){
-	  	console.log("yes")
-	    var ctx = canvas.getContext('2d');
-
-	    //Draw Circle
-	    ctx.arc(coords[0], coords[1], 2, 0, 360, false);
-	    ctx.fill()
   
+
+	var drawpixel = function(xchange, ychange, colour){
+		//Change the coordinates
+		coords[0] += xchange
+		coords[1] += ychange
+
+		//Draw Circle
+	    ctx.arc(coords[0], coords[1], 4, 0, 360, false);
+	    ctx.fill()
+	    // ctx.fillstyle = colour
+
 	}
   
   	var socket = io();
 
- 	 socket.on('data', function (data) {
- 	   console.log(data);
- 	   $(".data").text(data)
- 	 });
+ 	socket.on('data', function (data) {
+ 	   drawpixel(data["x"],data["y"], data["colour"])
+
+ 	});
+
+ 	 //Draw Center Pixel
+ 	drawpixel(0,0, "#000")
 </script>
 </body>
 </html>
