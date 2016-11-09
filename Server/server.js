@@ -15,45 +15,18 @@ console.log(0, "Server Started On Port " + port)
 
 app.post('/', function(req, res){
 	console.log(1, "Request for /")
-	console.log(req.body)
 	//Handle input from the pi
-});
+	console.log(req.body)
 
+	console.log(req.body.x)
+
+	x = req.body.x
+	y = req.body.y
+	colour = req.body.colour	
+
+	data = req.body
+	io.emit('data', data)
+	
+});
 
 app.use('/', express.static(__dirname + "/public/"))
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.emit('data', 1)
-});
-
-
-// io.on('connection', function (socket) {
-// 	console.log("connection")
-
-//   // // when the client emits 'new message', this listens and executes
-//   // socket.on('new message', function (data) {
-//   //   // we tell the client to execute 'new message'
-//   //   socket.broadcast.emit('new message', {
-//   //     username: socket.username,
-//   //     message: data
-//   //   });
-//   // });
-
-//   // // when the client emits 'add user', this listens and executes
-//   // socket.on('add user', function (username) {
-//   //   if (addedUser) return;
-
-//   //   // we store the username in the socket session for this client
-//   //   socket.username = username;
-//   //   ++numUsers;
-//   //   addedUser = true;
-//   //   socket.emit('login', {
-//   //     numUsers: numUsers
-//   //   });
-//   //   // echo globally (all clients) that a person has connected
-//   //   socket.broadcast.emit('user joined', {
-//   //     username: socket.username,
-//   //     numUsers: numUsers
-//   //   });
-//   });
