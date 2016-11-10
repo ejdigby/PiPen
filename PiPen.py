@@ -1,4 +1,7 @@
 #PiPen - Pi Code
+import os
+
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 #Import Libraries
 from sense_hat import sense_hat
