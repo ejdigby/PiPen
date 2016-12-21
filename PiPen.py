@@ -54,8 +54,8 @@ def handle_code(code):
         print("Right")
         colour += 1
 
-InputDeviceDispatcher(dev)
-loop()
+
+# loop()
 
   
 while True:
@@ -72,7 +72,7 @@ while True:
     print("x=%s, y=%s, color=%s" % (x, y, coloursHex[colour]))
     #Send latest data                                                                                                                                 
     send({"x":x, "y":y, "colour": coloursHex[colour]})
-
+    InputDeviceDispatcher(dev)
 # >>> dev = InputDevice('/dev/input/event1')
 
 
