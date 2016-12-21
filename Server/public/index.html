@@ -50,7 +50,7 @@
   	var socket = io();
 
  	socket.on('data', function (data) {
- 	 	drawpixel(Number(data["x"]),Number(data["y"]), data["colour"])
+ 	 	drawpixel(data["x"].toFixed(2),(data["y"].toFixed(2)), data["colour"])
  	});
 
  	 //Draw Center Pixel
