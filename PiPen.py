@@ -3,6 +3,10 @@ from sense_hat import SenseHat
 import requests
 from evdev import InputDevice, list_devices, ecodes
 import sys
+from asyncore import file_dispatcher, loop
+
+
+
 
 #Setup Colours                                                                                                                                            
 # Colours: Red, Yellow, Green, Light Blue, Dark blue, pink, purple, black                                                                                 
@@ -53,11 +57,20 @@ while True:
     print("x=%s, y=%s, color=%s" % (x, y, coloursHex[colour]))
     #Send latest data                                                                                                                                 
     send({"x":x, "y":y, "colour": coloursHex[colour]})
+    InputDeviceDispatcher(dev)
 
-    for event in dev.read_loop():
-        if event.type == ecodes.EV_KEY:
-            if event.value == 1:  # key dow                                                                                                   
-                handle_code(event.code)
-            if event.value == 0:  # key up                                                                                                    
-                handle_code(event.code)
+  
+# >>> dev = InputDevice('/dev/input/event1')
 
+class InputDeviceDispatcher(file_dispatcher):
+    def __init__(self, device):
+        self.device = device
+        file_dispatcher.__init__(self, device)
+    def recv(self, ign=None):
+        return self.device.read()
+    def handle_read(self):
+        for event in self.recv():
+            print(repr(event))
+
+# InputDeviceDispatcher(dev)
+# loop()
