@@ -1,12 +1,6 @@
 #PiPen - Pi Code
-import os
-
-os.environ["SDL_VIDEODRIVER"] = "dummy"
-
-#Import Libraries
-from sense_hat import sense_hat
+from sense_hat import SenseHat
 import requests
-import pygame
 
 #Setup Colours
 # Colours: Red, Yellow, Green, Light Blue, Dark blue, pink, purple, black
@@ -15,8 +9,6 @@ colours = [[255, 0, 0], [255, 255, 0], [0, 255, 0], [0, 255, 255], [0, 0, 255], 
 coloursHex = ["#ff0000","#ffff00", "#00ff00", "#00ffff", "#0000ff", "#8000ff", "#ff00bf", "#000000" ]
 
 #Initialize pygame and sense
-pygame.init()
-pygame.display.set_mode((640, 480))
 sense = SenseHat()
 
 #Define Send Function
@@ -28,22 +20,18 @@ def send(data):
 for i in range(0, len(colours) - 1):
 	sense.set_pixel(i, 3, colours[i])
 
+
 while True:
-	#Get Accelerometer Data
-    x, y = sense.get_accelerometer_raw().values()
+    acceleration = sense.get_accelerometer_raw()
+    x = acceleration['x']
+    y = acceleration['y']
+    z = acceleration['z']
 
     x=round(x, 0)
-    y=round(y, 0) 
+    y=round(y, 0)
+    z=round(z, 0)
 
-    for event in pygame.event.get():	
-    	if event.type == KEYDOWN:
-    		#When pushed right, change colour to the right by 1
-            if event.key == K_RIGHT and colour < 7:
-                colour += 1
-            #When pushed left, change colour to the right by 1
-            elif event.key == K_LEFT and colour > 0:
-            	colour -= 1
-
+    print("x={0}, y={1}, z={2}".format(x, y, z))
   
     print("x=%s, y=%s, color=%s" % (x, y, coloursHex[colour]))
     #Send latest data
