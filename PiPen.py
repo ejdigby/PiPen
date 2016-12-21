@@ -13,6 +13,7 @@ class InputDeviceDispatcher(file_dispatcher):
         self.device = device
         file_dispatcher.__init__(self, device)
     def recv(self, ign=None):
+        print(self.device.read())
         return self.device.read()
     def handle_read(self):
         for event in self.recv():
@@ -52,6 +53,11 @@ def handle_code(code):
     elif code == ecodes.KEY_RIGHT and colour < 7:
         print("Right")
         colour += 1
+
+InputDeviceDispatcher(dev)
+loop()
+
+  
 while True:
     acceleration = sense.get_accelerometer_raw()
     x = acceleration['x']
@@ -66,9 +72,7 @@ while True:
     print("x=%s, y=%s, color=%s" % (x, y, coloursHex[colour]))
     #Send latest data                                                                                                                                 
     send({"x":x, "y":y, "colour": coloursHex[colour]})
-    InputDeviceDispatcher(dev)
 
-  
 # >>> dev = InputDevice('/dev/input/event1')
 
 
